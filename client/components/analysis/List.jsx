@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ExpenseDisplay from './ExpenseDisplay';
-import IncomeDisplay from './IncomeDisplay';
 
-const FrontPage = ({ records }) => {
+const List = ({ records }) => {
   const [income, setIncome] = useState([]);
   const [expense, setExpense] = useState([]);
   const [incomeSum, setIncomeSum] = useState(0);
@@ -45,4 +43,4 @@ const FrontPage = ({ records }) => {
   );
 };
 
-export default FrontPage;
+export default List;
