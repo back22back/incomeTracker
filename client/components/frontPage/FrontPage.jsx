@@ -2,10 +2,10 @@ import React from 'react';
 import Display from './Display';
 import Input from './Input';
 
-const FrontPage = ({ records }) => (
+const FrontPage = (props) => (
   <div>
     <Input />
-    <Display records={records} />
+    <Display props={props} />
   </div>
 );
 

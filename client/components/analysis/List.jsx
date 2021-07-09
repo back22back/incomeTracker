@@ -1,46 +1,38 @@
 import React, { useState, useEffect } from 'react';
 
-const List = ({ records }) => {
-  const [income, setIncome] = useState([]);
-  const [expense, setExpense] = useState([]);
-  const [incomeSum, setIncomeSum] = useState(0);
-  const [expenseSum, setExpenseSum] = useState(0);
+const List = ({ category, breakdown }) => {
+  const [display, setDisplay] = useState();
 
   useEffect(() => {
-    const incomeTemp = [];
-    const expenseTemp = [];
-    let incomeNum = 0;
-    let expenseNum = 0;
-    for (let i = 0; i < records.length; i += 1) {
-      if (records[i].amount >= 0) {
-        incomeNum += records[i].amount;
-        incomeTemp.push(records[i]);
-      } else {
-        expenseNum += records[i].amount;
-        expenseTemp.push(records[i]);
-      }
+    if (breakdown && category) {
+      breakdown[category].sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
+      setDisplay(breakdown[category]);
     }
-    setIncome(incomeTemp);
-    setExpense(expenseTemp);
-    setIncomeSum(incomeNum);
-    setExpenseSum(expenseNum);
-  }, [records]);
+  }, [breakdown, category]);
 
-  return (
-    <div>
+  if (display) {
+    return (
       <div>
-        <IncomeDisplay income={income} sum={incomeSum} />
-        <ExpenseDisplay expense={expense} sum={expenseSum} />
+        <h2>{category}</h2>
+        <div>
+          <div>Title</div>
+          <div>Category</div>
+          <div>Amount</div>
+        </div>
+        {display.map((each, i) => (
+          <div key={i}>
+            <div>{each.title}</div>
+            <div>{each.category}</div>
+            <div>
+              {' '}
+              -$
+              {Math.abs(each.amount)}
+            </div>
+          </div>
+        ))}
       </div>
-      <div>
-        <span>Total</span>
-        <span>
-          $
-          {incomeSum + expenseSum}
-        </span>
-      </div>
-    </div>
-  );
+    );
+  }
+  return null;
 };
-
 export default List;
