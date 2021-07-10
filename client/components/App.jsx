@@ -1,80 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import HamburgerMenu from 'react-hamburger-menu';
+import axios from 'axios';
 import FrontPage from './frontPage/FrontPage';
 import Analysis from './analysis/Analysis';
 import Sidebar from './Header/Sidebar';
 
-const sampleData = [
-  {
-    title: 'work pay',
-    category: 'salary',
-    amount: 5000,
-  },
-  {
-    title: 'tips',
-    category: 'tips',
-    amount: 1500,
-  },
-  {
-    title: 'rent',
-    category: 'housing',
-    amount: -1000,
-  },
-  {
-    title: 'QFC',
-    category: 'grocery',
-    amount: -100,
-  },
-];
-
 const App = () => {
   const [page, setPage] = useState('Front Page');
   const [menu, setMenu] = useState(false);
-  const [incomes, setIncome] = useState([]);
-  const [expenses, setExpense] = useState([]);
+  const [incomes, setIncomes] = useState();
+  const [expenses, setExpenses] = useState();
   const [incomeSum, setIncomeSum] = useState(0);
   const [expenseSum, setExpenseSum] = useState(0);
+  const [pageReady, setPageReady] = useState(false);
+
+  const getData = async () => {
+    const incomePromise = axios.get('/income');
+    const expensePromise = axios.get('/expense');
+    const [incomeP, expenseP] = await Promise.all([incomePromise, expensePromise]);
+    setIncomes(incomeP.data);
+    const formatted = expenseP.data.map((each) => {
+      each.amount = Math.abs(each.amount);
+      return each;
+    });
+    setExpenses(formatted);
+    const incomeSumTemp = incomeP.data.reduce((accum, curr) => accum + JSON.parse(curr.amount), 0);
+    setIncomeSum(incomeSumTemp);
+    const exPSumTemp = expenseP.data.reduce((accum, curr) => accum + Math.abs(JSON.parse(curr.amount)), 0);
+    setExpenseSum(Math.abs(exPSumTemp));
+  };
 
   useEffect(() => {
-    const incomesTemp = [];
-    const expensesTemp = [];
-    let incomeNum = 0;
-    let expenseNum = 0;
-    for (let i = 0; i < sampleData.length; i += 1) {
-      if (sampleData[i].amount >= 0) {
-        incomeNum += sampleData[i].amount;
-        incomesTemp.push(sampleData[i]);
-      } else {
-        expenseNum += sampleData[i].amount;
-        expensesTemp.push(sampleData[i]);
-      }
-    }
-    setIncome(incomesTemp);
-    setExpense(expensesTemp);
-    setIncomeSum(incomeNum);
-    setExpenseSum(Math.abs(expenseNum));
-  }, [sampleData]);
+    getData();
+    setPageReady(true);
+  }, []);
+
+  if (!pageReady) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-      <h1>Income Tracker</h1>
+      <h1 className="mainTitle" onClick={() => setPage('Front Page')}>Income Tracker</h1>
+      <div className="hamburger">
+        <HamburgerMenu
+          isOpen={menu}
+          menuClicked={() => setMenu(!menu)}
+          width={30}
+          height={24}
+          strokeWidth={1}
+          rotate={0}
+          color="black"
+          borderRadius={0}
+          animationDuration={0.5}
+        />
+      </div>
 
-      <HamburgerMenu
-        isOpen={menu}
-        menuClicked={() => setMenu(!menu)}
-        width={18}
-        height={15}
-        strokeWidth={1}
-        rotate={0}
-        color="black"
-        borderRadius={0}
-        animationDuration={0.5}
-      />
-      {menu ? <Sidebar setPage={setPage} /> : null}
-
-      {page === 'Front Page' ? <FrontPage incomes={incomes} expenses={expenses} incomeSum={incomeSum} expenseSum={expenseSum} /> : null}
-      {page === 'Analysis' ? <Analysis incomes={incomes} expenses={expenses} incomeSum={incomeSum} expenseSum={expenseSum} /> : null}
-
+      {menu ? <Sidebar setPage={setPage} setMenu={setMenu} /> : null}
+      {page === 'Front Page' ? (
+        <FrontPage
+          incomes={incomes}
+          expenses={expenses}
+          incomeSum={incomeSum}
+          expenseSum={expenseSum}
+          getData={getData}
+        />
+      ) : null}
+      {page === 'Analysis' ? (
+        <Analysis
+          incomes={incomes}
+          expenses={expenses}
+          incomeSum={incomeSum}
+          expenseSum={expenseSum}
+        />
+      ) : null}
       <div />
     </div>
   );

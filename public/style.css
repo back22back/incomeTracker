@@ -1,8 +1,148 @@
+.mainTitle:hover,
+.hamburger:hover,
+.submit:hover,
+.toggleInEx:hover,
+.sidebar-components:hover {
+  cursor: pointer;
+  filter:drop-shadow(2px 2px 2px black)
+}
+
+#app {
+  justify-content: center;
+  background-color: white;
+  scroll-behavior: smooth;
+  font-family: 'Raleway', sans-serif;
+}
+
+.mainTitle {
+  margin-left:450px;
+  width:fit-content;
+  z-index: 1;
+}
+
+.hamburger {
+  margin-left:450px;
+  top: 100px;
+  width: 30px;
+  height: 24px;
+  z-index: 2;
+}
+
+.sidebar {
+  position:absolute;
+  left:460px;
+  top:110px;
+  margin-bottom: 10px;
+  z-index: 1;
+  background-color: white;
+}
+.sidebar-components {
+  margin-bottom: 10px;
+  font-size: x-large;
+}
+
+.summaries {
+  position:center;
+  text-align: left;
+  display:flex;
+  margin-left:450px;
+  margin-right:450px;
+  max-height:500px;
+}
+
+.input {
+  position:relative;
+  margin-left: 50px;
+  height: 300px;
+}
+
+.inputTitle {
+  position:absolute;
+  top:0;
+  left:40%;
+  font-size: xx-large;
+}
+
+.inputDescription {
+  display:flex;
+  margin: 10px;
+  font-size: x-large;
+  margin-bottom: 30px;
+}
+
+.inputDescriptionComp {
+  margin-left:20px;
+  margin-right: 20px;
+  font-size: x-large;
+}
+
+.inputAmount {
+  margin-left: 150px;
+}
+
+.submit {
+  position:absolute;
+  margin-left: 50%;
+  top: 180px;
+  width: 100px;
+  height: 50px;
+  font-size: large;
+  border-radius: 5px;
+}
+
+.gbutton {
+  background:lime;
+  color:rgb(255, 255, 255);
+}
+
+.rbutton {
+  background:red;
+  color:rgb(255, 255, 255);
+}
+
+.submit:hover {
+  filter:drop-shadow(2px 2px 2px black)
+}
+
+#title, #category {
+  font-size: x-large;
+  text-align: center;
+  width: 200px;
+  height: 30px;
+  caret-color: transparent;
+}
+
+#amount {
+  width: 250px;
+  height: 60px;
+  font-size: xx-large;
+  text-align: center;
+  margin-right: 40px;
+  caret-color: transparent;
+}
+
+.green {
+  color:lime;
+}
+
+.red {
+  color:red;
+}
+
+.inputForm {
+  position:absolute;
+  top:20%;
+  right:40%;
+  display: flex;
+  flex-direction: column;
+}
+
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+  position: absolute;
+  width: 50px;
+  height: 25px;
+  left: 440px;
+  top: -30px;
 }
 
 /* Hide default HTML checkbox */
@@ -20,7 +160,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #e9361f;
+  background-color: lime;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -28,21 +168,21 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #22e04b;
+  background-color: red;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #22e04b;
+  box-shadow: 0 0 1px red;
 }
 
 input:checked + .slider:before {
@@ -53,7 +193,7 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 25px;
 }
 
 .slider.round:before {
@@ -69,4 +209,100 @@ input:checked + .slider:before {
   border-color: rgba(64, 194, 133, 0.693);
   background-color: rgb(255, 255, 255);
   transition: 0.8s ease;
+}
+
+.display {
+  flex: 2;
+  height: 450px;
+  overflow-y: auto;
+  position:relative;
+}
+
+.displayTitle {
+  margin-left: 15%;
+  font-size: x-large;
+}
+
+.displayRows {
+  display:flex;
+}
+
+.displayRowItems {
+  text-align: center;
+  width: 90px;
+  margin: 4px;
+}
+
+.displaySum {
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 120px;
+  position: absolute;
+  bottom: 0;
+  display:flex;
+}
+
+.displaySumComp {
+  margin: 5px;
+  font-size: 20px;
+}
+
+.summariesSum {
+  text-align: left;
+  margin-left: 43%;
+  font-size: 35px;
+  display:flex;
+}
+
+.summariesSumComp {
+  margin: 5px;
+}
+
+
+/*analysis*/
+
+.toggleInEx {
+  margin-left: 48%;
+  top: 150px;
+  width: 100px;
+  height: 50px;
+  font-size: large;
+  border-radius: 5px;
+}
+
+.analysisSum {
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 46%;
+  width:fit-content;
+  display:flex;
+  font-size: 40px;
+}
+
+.analysisSumComp {
+  margin:5px;
+}
+
+.cover1 {
+  position:absolute;
+  width: 100px;
+  height: 30px;
+  z-index: 2;
+  left: 0;
+  top: 540px;
+  background-color: white;
+}
+
+.cover2 {
+  position:absolute;
+  width: 100px;
+  height: 30px;
+  z-index: 2;
+  right: 0;
+  top: 540px;
+  background-color: white;
+}
+
+.list {
+  margin-left: 40%;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import List from './List';
+import IncomeList from './IncomeList';
 import CanvasJSReact from './canvasjs.react';
 
 const { CanvasJS } = CanvasJSReact;
@@ -40,9 +40,7 @@ const IncomePie = ({ incomeBreakdownSum, incomeBreakdown }) => {
   return (
     <div>
       <CanvasJSChart options={options} />
-      <div className="cover" />
-      <div className="cover" />
-      <List category={listCategory} breakdown={incomeBreakdown} />
+      <IncomeList category={listCategory} breakdown={incomeBreakdown} />
     </div>
   );
 };

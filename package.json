@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-dev": "npx webpack",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./FrontEnd/index.js",
+    "server-start": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.9",
     "path": "^0.12.7",
+    "pg": "^8.6.0",
+    "pg-promise": "^10.10.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

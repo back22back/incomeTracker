@@ -2,17 +2,17 @@ import React from 'react';
 import ExpenseDisplay from './ExpenseDisplay';
 import IncomeDisplay from './IncomeDisplay';
 
-const FrontPage = ({
+const Display = ({
   incomes, expenses, incomeSum, expenseSum,
 }) => (
   <div>
-    <div>
+    <div className="summaries">
       <IncomeDisplay incomes={incomes} sum={incomeSum} />
       <ExpenseDisplay expenses={expenses} sum={expenseSum} />
     </div>
-    <div>
-      <span>Total</span>
-      <span>
+    <div className="summariesSum">
+      <span className={incomeSum - expenseSum > 0 ? 'summariesSumComp green' : 'summariesSumComp red'}>Total</span>
+      <span className={incomeSum - expenseSum > 0 ? 'summariesSumComp green' : 'summariesSumComp red'}>
         $
         {incomeSum - expenseSum}
       </span>
@@ -20,4 +20,4 @@ const FrontPage = ({
   </div>
 );
 
-export default FrontPage;
+export default Display;

@@ -41,6 +41,12 @@ const Analysis = ({
 
   return (
     <div>
+      <button
+        className={selectIncome ? 'toggleInEx gbutton' : 'toggleInEx rbutton'}
+        onClick={() => setSelectIncome(!selectIncome)}
+      >
+        {selectIncome ? 'Income' : 'Expense'}
+      </button>
       { selectIncome
         ? (
           <IncomePie
@@ -53,12 +59,14 @@ const Analysis = ({
             expenseBreakdownSum={expenseBreakdownSum}
           />
         )}
-      <div>
-        <span>Total</span>
-        <span>
+      <div className="analysisSum">
+        <span className="analysisSumComp">Total:</span>
+        <span className="analysisSumComp">
           { selectIncome ? `$${incomeSum}` : `-$${expenseSum}`}
         </span>
       </div>
+      <div className="cover1" />
+      <div className="cover2" />
     </div>
   );
 };
